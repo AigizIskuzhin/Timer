@@ -1,0 +1,78 @@
+﻿<Window x:Class="Timer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Timer"
+        mc:Ignorable="d"
+        MouseDown="OnBackgroundClick"
+        Title="Таймер"
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Background" Value="WhiteSmoke"/>
+            </Style>
+            
+        </Grid.Resources>
+
+        <TextBox Name="TitleOne" MouseWheel="OnMouseWheelResize"/>
+        <StackPanel Grid.Row="1" >
+            <TextBlock Name="TimerOne" Text="" MouseWheel="OnMouseWheelResize" FontSize="60"/>
+            <TextBlock Name="Title" Text="" MouseWheel="OnMouseWheelResize"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Добавить" Click="OnClickAddTimer"/>
+                <Button Content="Удалить" Name="RemoveBtn" Visibility="Collapsed" Click="OnClickRemoveSelected"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Старт" Name="StartBtn" Click="OnClickStartTimer" Visibility="Collapsed"/>
+                <Button Content="Пауза" Name="PauseBtn" Click="OnClickPauseTimer" Visibility="Collapsed"/>
+                <Button Content="Сброс" Name="DropBtn" Click="OnClickDropTimer" Visibility="Collapsed"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Выбрать звук" Name="MusicBtn" Click="OnClickSelectMusic"  Visibility="Collapsed"/>
+                <Button Content="Следующий" Name="NextBtn" Click="OnClickSetupNext" Visibility="Collapsed"/>
+            </StackPanel>
+        </Grid>
+        <ListView Name="List" Grid.Row="3" BorderThickness="0" Padding="0" Margin="0">
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListView.Resources>
+            <ItemsControl.ItemTemplate>
+                <ItemContainerTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Title}" Margin="4"/>
+                        <TextBlock Text="{Binding AsText}" Margin="4"/>
+                    </StackPanel>
+                </ItemContainerTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

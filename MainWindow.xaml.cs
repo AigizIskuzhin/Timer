@@ -1,13 +1,11 @@
-﻿using System;
-using System.Configuration;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
-using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Microsoft.Win32;
 
 namespace Timer
 {

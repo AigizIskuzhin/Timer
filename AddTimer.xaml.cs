@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -16,7 +15,7 @@ namespace Timer
             InitializeComponent();
         }
 
-        private MainWindow Parent;
+        private new readonly MainWindow Parent;
         private void EventSetter_OnHandler(object sender, MouseWheelEventArgs e)
         {
             bool IsAdding = e.Delta > 0;

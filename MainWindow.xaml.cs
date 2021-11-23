@@ -191,7 +191,7 @@ namespace Timer
             {
                 FileInfo file = new(OpenFileDialog.FileName);
                 MediaPlayer.Open(new Uri(file.FullName, UriKind.Absolute));
-                ((Button)sender).Content = file.Name.Length > 10 ? file.Name.Substring(0, 10) + "..." : file.Name;
+                ((Button)sender).Content = file.Name.Length > 10 ? file.Name[..10] + "..." : file.Name;
             }
         }
     }

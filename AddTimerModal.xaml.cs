@@ -5,11 +5,11 @@ using System.Windows.Input;
 namespace Timer
 {
     /// <summary>
-    /// Interaction logic for AddTimer.xaml
+    /// Interaction logic for AddTimerModal.xaml
     /// </summary>
-    public partial class AddTimer : Window
+    public partial class AddTimerModal : UserControl
     {
-        public AddTimer(MainWindow parent)
+        public AddTimerModal(MainWindow parent)
         {
             Parent = parent;
             InitializeComponent();
@@ -38,14 +38,15 @@ namespace Timer
             var title = Title.Text.Length == 0 ? "Без названия" : Title.Text;
             if (hours == 0 && minutes == 0 && seconds == 0)
             {
-                Close();
                 return;
             }
             Parent.AddTimerToList(new MainWindow.TimerStruct(hours, minutes, seconds, title));
-            Close();
+            Parent.CloseModal();
         }
 
         private void Title_OnMouseWheel(object sender, MouseWheelEventArgs e)
         { }
+
+        private void Background_OnMouseDown(object sender, MouseButtonEventArgs e) => Parent.CloseModal();
     }
 }

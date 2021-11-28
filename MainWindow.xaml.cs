@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
 
 namespace Timer
@@ -140,7 +141,12 @@ namespace Timer
                     break;
             }
         }
-        private void OnClickAddTimer(object sender, RoutedEventArgs e) => new AddTimer(this).ShowDialog();
+        private void OnClickAddTimer(object sender, RoutedEventArgs e)
+        {
+            ModalControl.Content ??= new AddTimerModal(this);
+            ModalControl.Visibility = Visibility.Visible;
+            ((BlurEffect)Layout.Effect).Radius = 5;
+        }
 
         private void OnClickRemoveSelected(object sender, RoutedEventArgs e)
         {
@@ -193,6 +199,12 @@ namespace Timer
                 MediaPlayer.Open(new Uri(file.FullName, UriKind.Absolute));
                 ((Button)sender).Content = file.Name.Length > 10 ? file.Name[..10] + "..." : file.Name;
             }
+        }
+
+        public void CloseModal()
+        {
+            ModalControl.Visibility = Visibility.Collapsed;
+            ((BlurEffect)Layout.Effect).Radius = 0;
         }
     }
 }

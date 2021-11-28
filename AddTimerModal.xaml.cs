@@ -28,7 +28,6 @@ namespace Timer
             number = number < 0 ? 59 : number;
 
             input.Text = number < 10 ? "0" + number : number.ToString();
-
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -38,9 +37,7 @@ namespace Timer
             var seconds = int.Parse(Seconds.Text);
             var title = Title.Text.Length == 0 ? "Без названия" : Title.Text;
             if (hours == 0 && minutes == 0 && seconds == 0)
-            {
                 return;
-            }
             Parent.AddTimerToList(new MainWindow.TimerStruct(hours, minutes, seconds, title));
             Parent.CloseModal();
         }

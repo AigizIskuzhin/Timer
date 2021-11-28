@@ -26,7 +26,8 @@ namespace Timer
 
             number = number > 59 ? 0 : number;
             number = number < 0 ? 59 : number;
-            input.Text = number.ToString();
+
+            input.Text = number < 10 ? "0" + number : number.ToString();
 
         }
 

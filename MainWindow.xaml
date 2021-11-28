@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Timer"
         mc:Ignorable="d"
         MouseDown="OnBackgroundClick"
         Title="Таймер"
@@ -11,16 +10,6 @@
     
     <Grid>
         <Grid Name="Layout">
-            <Grid.Effect>
-                <BlurEffect Radius="0"/>
-            </Grid.Effect>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
             <Grid.Resources>
                 <Style TargetType="TextBox">
                     <Setter Property="TextAlignment" Value="Center"/>
@@ -41,11 +30,21 @@
                 </Style>
                 
             </Grid.Resources>
-
+            <Grid.Effect>
+                <BlurEffect Radius="0"/>
+            </Grid.Effect>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <TextBox Name="TitleOne" MouseWheel="OnMouseWheelResize"/>
-            <StackPanel Grid.Row="1" >
-                <TextBlock Name="TimerOne" Text="" MouseWheel="OnMouseWheelResize" FontSize="60"/>
-                <TextBlock Name="Title" Text="" MouseWheel="OnMouseWheelResize"/>
+            
+            <ProgressBar Name="ProgressBar" Visibility="Hidden" Grid.Row="1" VerticalAlignment="Top"/>
+            <StackPanel Grid.Row="1" VerticalAlignment="Top" SizeChanged="OnCurrentTimerSizeChanged">
+                <TextBlock Name="TimerOne" Text="Таймер не выбран" MouseWheel="OnMouseWheelResize" FontSize="60"/>
+                <TextBlock Name="Title" Margin="0 0 0 10" MouseWheel="OnMouseWheelResize"/>
             </StackPanel>
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal">

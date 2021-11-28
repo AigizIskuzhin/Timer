@@ -39,6 +39,8 @@ namespace Timer
                     return text;
                 }
             }
+
+            public int ToSeconds => Hours * 60 * 60 + Minutes * 60 + Seconds;
         }
         private readonly DispatcherTimer TimerSelf = new();
         private readonly OpenFileDialog OpenFileDialog = new();
@@ -51,24 +53,21 @@ namespace Timer
             TimerSelf.Interval = new TimeSpan(0, 0, 0, 1);
         }
 
-        private int seconds = 0;
+        private int seconds;
         private void TimerSelf_Tick(object sender, EventArgs e)
         {
             seconds -= 1;
-            if (seconds < 0)
-            {
-                TimerSelf.Stop();
+            ProgressBar.Value = CurrentTimer.ToSeconds - seconds;
+            TimerOne.Text = $"{seconds / 3600:00}:{seconds / 60 % 60:00}:{seconds % 60:00}";
+            //TimerOne.Dispatcher.Invoke(() =>
+            //{
                 
-                Dispatcher.Invoke(() =>
-                {
-                    MediaPlayer.Play();
-                });
-                return;
-            }
-            TimerOne.Dispatcher.Invoke(() =>
-            {
-                TimerOne.Text = $"{seconds / 3600:00}:{seconds / 60 % 60:00}:{seconds % 60:00}";
-            });
+            //});
+            if (seconds > 0) return;
+
+            TimerSelf.Stop();
+            MediaPlayer.Play();
+            //Dispatcher.Invoke(() => );
         }
 
         public void AddTimerToList(TimerStruct timer)
@@ -82,6 +81,7 @@ namespace Timer
             if (!isNull)
             {
                 CurrentTimer = (TimerStruct)List.SelectedItem;
+                ProgressBar.Maximum = seconds;
                 Title.Text = CurrentTimer.Title;
                 TimerOne.Text = CurrentTimer.AsText;
 
@@ -119,6 +119,8 @@ namespace Timer
                 Title.Text = CurrentTimer.Title;
                 TimerOne.Text = CurrentTimer.AsText;
                 _CurrentStruct = value;
+
+                ProgressBar.Visibility = Visibility.Visible;
             }
         }
 
@@ -206,5 +208,7 @@ namespace Timer
             ModalControl.Visibility = Visibility.Collapsed;
             ((BlurEffect)Layout.Effect).Radius = 0;
         }
+
+        private void OnCurrentTimerSizeChanged(object sender, SizeChangedEventArgs e) => ProgressBar.Height = e.NewSize.Height;
     }
 }

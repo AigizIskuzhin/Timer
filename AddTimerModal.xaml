@@ -68,7 +68,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Name="Hours" Text="0" MouseWheel="EventSetter_OnHandler" ToolTip="Часы"/>
                     <TextBox Name="Minutes" Text="0" Grid.Column="1" MouseWheel="EventSetter_OnHandler" ToolTip="Минуты"/>
-                    <TextBox Name="Seconds" Text="0" Grid.Column="2" MouseWheel="EventSetter_OnHandler" TouchLeave="Секунды"/>
+                    <TextBox Name="Seconds" Text="0" Grid.Column="2" MouseWheel="EventSetter_OnHandler" ToolTip="Секунды"/>
                     <Button Content="Добавить" Grid.Row="1" Grid.Column="1" Margin="0 2" Click="ButtonBase_OnClick"/>
                 </Grid>
             </StackPanel>

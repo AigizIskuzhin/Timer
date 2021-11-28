@@ -69,7 +69,14 @@
                     <TextBox Name="Hours" Text="00" MouseWheel="EventSetter_OnHandler" ToolTip="Часы"/>
                     <TextBox Name="Minutes" Text="00" Grid.Column="1" MouseWheel="EventSetter_OnHandler" ToolTip="Минуты"/>
                     <TextBox Name="Seconds" Text="00" Grid.Column="2" MouseWheel="EventSetter_OnHandler" ToolTip="Секунды"/>
-                    <Button Content="Добавить" Grid.Row="1" Grid.Column="1" Margin="0 2" Click="ButtonBase_OnClick"/>
+                    <Button Content="Добавить" Grid.Row="1" Grid.Column="1" Margin="0 2" Click="ButtonBase_OnClick">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="Padding" Value="10,2,10,3"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </StackPanel>
             </Border>
